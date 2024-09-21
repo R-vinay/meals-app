@@ -3,10 +3,20 @@ import React from "react";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
 //rnfe
-const renderCategoryItem = (item) => {
-  return <CategoryGridTile title={item.title} color={item.color} />;
-};
-const CategoriesScreen = () => {
+
+const CategoriesScreen = ({ navigation }) => {
+  const renderCategoryItem = (item) => {
+    function handleNavigate() {
+      navigation.navigate("Meals");
+    }
+    return (
+      <CategoryGridTile
+        title={item.title}
+        color={item.color}
+        onPress={handleNavigate}
+      />
+    );
+  };
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1">
