@@ -2,6 +2,7 @@ import { View, Text, FlatList, SafeAreaView } from "react-native";
 import React from "react";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
+
 //rnfe
 
 const CategoriesScreen = ({ navigation }) => {
@@ -11,6 +12,7 @@ const CategoriesScreen = ({ navigation }) => {
     }
     return (
       <CategoryGridTile
+        id={item.id}
         title={item.title}
         color={item.color}
         onPress={handleNavigate}
@@ -18,9 +20,8 @@ const CategoriesScreen = ({ navigation }) => {
     );
   };
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 ">
       <View className="flex-1">
-        <Text>CategoriesScreen</Text>
         <FlatList
           data={CATEGORIES}
           renderItem={(items) => renderCategoryItem(items.item)}
