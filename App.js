@@ -1,6 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { Button, Text, View } from "react-native";
-import CategoryGridTile from "./components/CategoryGridTile";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,8 +6,10 @@ import MealDetailsScreen from "./screens/MealDetailsScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FavoritesScreen from "./screens/FavoritesScreen";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-
-// import "./gesture-handler";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+SplashScreen.preventAutoHideAsync();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 function DrawerNavigator() {
@@ -48,6 +47,18 @@ function DrawerNavigator() {
   );
 }
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "montserrat-regular": require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
+    "montserrat-italic": require("./assets/fonts/Montserrat-Italic-VariableFont_wght.ttf"),
+  });
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator

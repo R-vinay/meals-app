@@ -4,7 +4,12 @@ import React from "react";
 const FavoritesScreen = () => {
   return (
     <View>
-      <Text>FavoritesScreen</Text>
+      <Text
+        className="font-semibold text-xl"
+        style={{ fontFamily: "montserrat-regular", fontWeight: 800 }}
+      >
+        FavoritesScreen
+      </Text>
     </View>
   );
 };
