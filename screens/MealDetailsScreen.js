@@ -1,21 +1,26 @@
 import { View, Text, Image, ScrollView, Button } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { MEALS } from "../data/dummy-data";
 import MealInfo from "../components/MealInfo";
 import FavoriteButton from "../components/FavoriteButton";
-
+import Favorite from "../context/Favorite";
 const MealDetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { mealID } = route.params;
-
+  const { favorites } = useContext(Favorite);
   const current_meal = MEALS.find((meal) => meal.id === mealID);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: current_meal.title,
       headerRight: () => {
-        return <FavoriteButton />;
+        return (
+          <FavoriteButton
+            meal={current_meal.id}
+            isAlreadyFavorite={favorites.indexOf(mealID) >= 0}
+          />
+        );
       },
     });
   }, [mealID]);
